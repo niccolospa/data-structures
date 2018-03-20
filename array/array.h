@@ -1,10 +1,30 @@
-#ifndef LB_ARRAY
-#define LB_ARRAY
+#ifndef LB_ARRAY_H
+#define LB_ARRAY_H
 
-typedef struct array_s *Array;
+#include "Item.h"
 
-Array arrayInit(int size, int (*compare)(void* e1,void *e2));
-void arrayInsert(Array a, void *element, int index);
-void *arrayGet(Array a, int index);
+typedef struct array_s *LArray;
+
+//construction
+LArray LARRAYinit(int);
+void LARRAYfree(LArray);
+
+//sort
+void LARRAYbubblesort(LArray);
+void LARRAYselectionsort(LArray);
+void LARRAYinsertionsort(LArray);
+void LARRAYshellsort(LArray);
+void LARRAYcountingsort(LArray,int);
+//void LARRAYheapsort(LArray);
+//void LARRAYquicksort(LArray);
+//void LARRAYmergesort(LArray);
+
+//search
+int LARRAYlinearsearch(LArray,Item);
+int LARRAYbinarysearch(LArray,Item);
+
+//utility
+Item LARRAYget(LArray,int);
+void LARRAYinsert(LArray,Item,int);
 
 #endif
