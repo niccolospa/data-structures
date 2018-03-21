@@ -15,9 +15,9 @@ void LARRAYselectionsort(LArray);
 void LARRAYinsertionsort(LArray);
 void LARRAYshellsort(LArray);
 void LARRAYcountingsort(LArray,int);
-//void LARRAYheapsort(LArray);
-//void LARRAYquicksort(LArray);
-//void LARRAYmergesort(LArray);
+void LARRAYheapsort(LArray);
+void LARRAYquicksort(LArray);
+void LARRAYmergesort(LArray);
 
 //search
 int LARRAYlinearsearch(LArray,Item);

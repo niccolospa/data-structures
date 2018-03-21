@@ -161,6 +161,104 @@ void LARRAYcountingsort(LArray A, int k){
 	}
 }
 
+/*
+Quick Sort:
+- Complexity: n log n (n^2 worst case, very unlikely)
+- Recursive
+- Unstable
+- In-place
+Select a "pivot" Item; then every Item smaller than
+that, is moved to its left; every bigger one is moved
+to its right. Then quicksort is applied to each
+sub-array.
+Partition can be made in several ways. I use the
+"Partition à la Hoare".
+*/
+void LQuickSort(LArray A, int l, int r);
+void LSwap(LArray A, int n1, int n2);
+int partition(LArray A, int l, int r);
+void LARRAYquicksort(LArray A){
+    LQuickSort(A, 0, A->n-1);
+}
+void LQuickSort(LArray A, int l, int r){
+    int q;
+    if(r<=l)
+        return;
+    q = partition(A, l, r);
+    LQuickSort(A, l, q-1);
+    LQuickSort(A, q+1, r);
+    return;
+}
+void LSwap(LArray A, int n1, int n2){
+    Item tmp;
+    tmp = A->v[n1];
+    A->v[n1] = A->v[n2];
+    A->v[n2] = tmp;
+    return;
+}
+int partition(LArray A, int l, int r){
+    int i=l-1, j=r;
+    Item x = A->v[r];
+    for( ; ; ){
+        while(ITEMless(A->v[++i],x) && i<r);
+        while(ITEMgreat(A->v[--j],x) && j>l);
+            if(j<l)
+        if(j==l) break;
+        if(i>=j) break;
+        LSwap(A,i,j);
+    }
+    LSwap(A,i,r);
+    return i;
+}
+
+/*
+Merge Sort:
+- Complexity - n log n
+- Recursive
+- Stable
+- Not in-place
+This sort uses a temporary B array. For each
+recursive call, MergeSort is applied to half
+of the initial array, until the termination
+case (array of 1 element).
+The merging operation works by taking elements
+from one of the two sub-arrays by comparing them.
+*/
+void LMergeSort(LArray A, Item *B, int l, int r);
+void LMerge(LArray A, Item *B, int l, int q, int r);
+void LARRAYmergesort(LArray A){
+    Item *B = malloc(A->n * sizeof(Item));
+    LMergeSort(A,B,0,A->n-1);
+    free(B);
+}
+void LMergeSort(LArray A, Item *B, int l, int r){
+    int q = (l+r)/2;
+    if(r<=l)
+        return;
+    LMergeSort(A,B,l,q);
+    LMergeSort(A,B,q+1,r);
+    LMerge(A,B,l,q,r);
+}
+void LMerge(LArray A, Item *B, int l, int q, int r){
+    int i,j,k;
+    i = l;
+    j = q+1;
+    for(k=l;k<=r;k++){
+        if(i > q)
+            B[k]=A->v[j++];
+        else if (j > r)
+            B[k]=A->v[i++];
+        else if (ITEMless(A->v[i],A->v[j]) || ITEMeq(A->v[i],A->v[j]))
+            B[k]=A->v[i++];
+        else
+            B[k]=A->v[j++];
+    }
+    for(k=l;k<=r;k++)
+        A->v[k]=B[k];
+    return;
+}
+
+
 //search
 int LARRAYlinearsearch(LArray A, Item item){
 	int i;

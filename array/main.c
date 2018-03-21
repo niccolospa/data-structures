@@ -12,7 +12,9 @@ int main(){
     //LARRAYselectionsort(A); //it works
     //LARRAYinsertionsort(A); //it works
     //LARRAYshellsort(A); //it works
-    LARRAYcountingsort(A,11); //it works
+    //LARRAYcountingsort(A,11); //it works
+    //LARRAYmergesort(A); //it works
+    LARRAYquicksort(A); //it works
 
     if(LARRAYlinearsearch(A, ITEMinit(3))>=0) //it works
         printf("Linear Found!\n");
