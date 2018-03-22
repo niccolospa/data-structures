@@ -106,6 +106,11 @@ dlink LDHEAD(LDList L){
 	return *L;
 }
 
+LDList LDLISTinit(){
+    LDList L = malloc(sizeof(*L));
+    return L;
+}
+
 int LDLISTcount(LDList L){
 	dlink x = LDHEAD(L);
 	int count=0;
@@ -165,7 +170,6 @@ void LDLISTdelete(LDList L,Item item){
 			else{
 				t->prev->next = t->next;
 				t->next->prev = t->prev;
-				
 			}
 			free(t);
 			break;
