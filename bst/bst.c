@@ -40,7 +40,7 @@ Item searchR(link h, Key k, link z){
 		return ITEMsetvoid();
 	if(KEYcompare(k, KEYget(h->item))==0)
 		return h->item;
-	if(KEYcompare(k, KEYget(h->item))==-1)
+	if(KEYcompare(k, KEYget(h->item))<0)
 		return searchR(h->l, k, z);
 	else
 		return searchR(h->r, k, z);
@@ -122,7 +122,7 @@ void BSTinsert_leafI(BST bst, Item x){
 		h->N++;
 		h = (ITEMless(x, h->item)) ? h->l : h->r;
 	}
-	h = NEW(x, p, bst->z, bst->z, 1);
+	h = NEW(x, p, bst->z, bst->z, bst->z, 1);
 	bst->N++;
 	if(ITEMless(x,p->item))
 		p->l = h;
@@ -226,7 +226,7 @@ Item searchSucc(link h, Key k, link z){
 			return p->item;
 		}
 	}
-	if(KEYcompare(k, KEYget(h->item))==-1)
+	if(KEYcompare(k, KEYget(h->item))<0)
 		return searchSucc(h->l, k, z);
 	else
 		return searchSucc(h->r, k, z);
@@ -252,7 +252,7 @@ Item searchPred(link h, Key k, link z){
 			return p->item;
 		}
 	}
-	if(KEYcomapre(k, KEYget(h->item))==-1)
+	if(KEYcompare(k, KEYget(h->item))<0)
 		return searchPred(h->l, k, z);
 	else
 		return searchPred(h->r, k, z);
@@ -289,9 +289,9 @@ link deleteR(link h, Key k, link z){
 	link y, p;
 	if(h==z)
 		return z;
-	if(KEYcompare(k, KEYget(h->item))==-1)
+	if(KEYcompare(k, KEYget(h->item))<0)
 		h->l = deleteR(h->l, k, z);
-	if(KEYcompare(k, KEYget(h->item))==1)
+	if(KEYcompare(k, KEYget(h->item))>0)
 		h->r = deleteR(h->r, k, z);
 	(h->N)--;
 	if(KEYcompare(k, KEYget(h->item))==0){
